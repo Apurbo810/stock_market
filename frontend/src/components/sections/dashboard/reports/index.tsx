@@ -30,7 +30,7 @@ const Reports = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get<TradeData[]>('http://127.0.0.1:5000/data')
+      .get<TradeData[]>('https://stock-market-ww6r.onrender.com/data')
       .then((response) => {
         setData(response.data);
         const uniqueTradeCodes = [...new Set(response.data.map((item) => item.trade_code))];

@@ -35,9 +35,40 @@ const AddTradeForm: React.FC<AddTradeFormProps> = ({
   onInputChange,
   onSubmit,
 }) => {
+  // State to track validation errors
+  const [errors, setErrors] = React.useState<Partial<Record<keyof OrderData, boolean>>>({});
+
+  // Validate all fields
+  const validateForm = () => {
+    const newErrors: Partial<Record<keyof OrderData, boolean>> = {};
+    const requiredFields: (keyof OrderData)[] = [
+      "date",
+      "trade_code",
+      "high",
+      "low",
+      "open",
+      "close",
+      "volume",
+    ];
+
+    requiredFields.forEach((field) => {
+      if (!newOrder[field]) {
+        newErrors[field] = true;
+      }
+    });
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async () => {
+    if (!validateForm()) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
     try {
-      const response = await fetch("http://127.0.0.1:5000/data", {
+      const response = await fetch("https://stock-market-ww6r.onrender.com/data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newOrder),
@@ -59,6 +90,7 @@ const AddTradeForm: React.FC<AddTradeFormProps> = ({
     InputLabelProps: { shrink: true },
     size: "small" as const,
     onChange: onInputChange,
+    required: true,
   };
 
   return (
@@ -74,6 +106,8 @@ const AddTradeForm: React.FC<AddTradeFormProps> = ({
               value={newOrder.date}
               type="date"
               fullWidth
+              error={!!errors.date}
+              helperText={errors.date ? "This field is required" : ""}
             />
           </Grid>
           <Grid item xs={6} sx={{ mt: 3 }}>
@@ -83,6 +117,8 @@ const AddTradeForm: React.FC<AddTradeFormProps> = ({
               name="trade_code"
               value={newOrder.trade_code}
               sx={{ width: 200 }}
+              error={!!errors.trade_code}
+              helperText={errors.trade_code ? "This field is required" : ""}
             />
           </Grid>
           {["high", "low", "open", "close", "volume"].map((field) => (
@@ -93,6 +129,10 @@ const AddTradeForm: React.FC<AddTradeFormProps> = ({
                 name={field}
                 value={newOrder[field as keyof OrderData]}
                 sx={{ width: 200 }}
+                error={!!errors[field as keyof OrderData]}
+                helperText={
+                  errors[field as keyof OrderData] ? "This field is required" : ""
+                }
               />
             </Grid>
           ))}

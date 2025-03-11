@@ -35,7 +35,7 @@ const RecentOrders: React.FC = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/data");
+      const response = await axios.get("https://stock-market-ww6r.onrender.com/data");
       setOrdersData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -44,7 +44,7 @@ const RecentOrders: React.FC = () => {
 
   const handleUpdate = async (updatedOrder: OrderData) => {
     try {
-      await axios.put(`http://127.0.0.1:5000/data/${updatedOrder.id}`, updatedOrder);
+      await axios.put(`https://stock-market-ww6r.onrender.com/data/${updatedOrder.id}`, updatedOrder);
       alert("Trade updated successfully!");
       fetchOrders();
     } catch (error) {
@@ -56,7 +56,7 @@ const RecentOrders: React.FC = () => {
     if (!window.confirm("Are you sure you want to delete this record?")) return;
     
     try {
-      await axios.delete(`http://127.0.0.1:5000/data/${id}`);
+      await axios.delete(`https://stock-market-ww6r.onrender.com/data/${id}`);
       alert("Trade deleted successfully!");
       fetchOrders();
     } catch (error) {

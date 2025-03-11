@@ -49,7 +49,7 @@ const UpdateForm: React.FC<UpdateFormProps> = ({
     if (!updatedOrder) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/data/${updatedOrder.id}`, {
+      const response = await fetch(`https://stock-market-ww6r.onrender.com/data/${updatedOrder.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedOrder),
