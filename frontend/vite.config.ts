@@ -23,4 +23,18 @@ export default defineConfig({
     port: 5000,
   },
   base: '/base',
+  build: {
+    rollupOptions: {
+      output: {
+        // Custom chunking strategy
+        manualChunks(id) {
+          // Example: Split libraries from node_modules into a separate chunk
+          if (id.includes('node_modules')) {
+            return 'vendor'; // This will bundle all vendor dependencies into a separate chunk
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,  // Increase the chunk size limit if necessary
+  },
 });
