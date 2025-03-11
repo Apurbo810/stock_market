@@ -2,12 +2,13 @@ import json
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 # Database configuration (using local PostgreSQL)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost/test'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://test_i9q3_user:027lSHZYJv8wk5dDtQ1Mg0CMPtUsjyqn@dpg-cv59t45ds78s739bjf0g-a.oregon-postgres.render.com/test_i9q3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -149,5 +150,8 @@ def get_unique_trade_codes():
 
 
 
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port, debug=True)
