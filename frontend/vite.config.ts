@@ -22,8 +22,9 @@ export default defineConfig({
   preview: {
     port: 5000,
   },
-  base: '/base',
+  base: '/base', // Ensures assets and routing work correctly
   build: {
+    outDir: 'dist', // Specifies the output directory for built assets
     rollupOptions: {
       output: {
         // Custom chunking strategy
@@ -35,6 +36,6 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 1000,  // Increase the chunk size limit if necessary
+    chunkSizeWarningLimit: 1000, // Increase the chunk size limit if necessary
   },
 });
