@@ -22,7 +22,7 @@ export default defineConfig({
   preview: {
     port: 5000,
   },
-  base: '/base', // Ensures assets and routing work correctly
+  base: '/', // Ensures assets and routing work correctly
   build: {
     outDir: 'dist', // Specifies the output directory for built assets
     rollupOptions: {

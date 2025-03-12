@@ -1,68 +1,19 @@
-/* eslint-disable react-refresh/only-export-components */
-import { Suspense, lazy } from 'react';
-import { Outlet, createBrowserRouter } from 'react-router-dom';
-import Splash from 'components/loader/Splash';
-import PageLoader from 'components/loader/PageLoader';
-import paths, { rootPaths } from './paths';
+import { createBrowserRouter } from 'react-router-dom';
+import Dashboard from 'pages/dashboard';  // Import your Dashboard component
+import Error404 from 'pages/errors/Error404';  // Import your 404 Error page
 
-const App = lazy(() => import('App'));
-const MainLayout = lazy(() => import('layouts/main-layout'));
-const Dashboard = lazy(() => import('pages/dashboard'));
-const Error404 = lazy(() => import('pages/errors/Error404'));
-
+// Simple routing configuration
 const routes = [
   {
-    element: (
-      <Suspense fallback={<Splash />}>
-        <App />
-      </Suspense>
-    ),
-    children: [
-      {
-        path: '/',
-        element: (
-          <MainLayout>
-            <Suspense fallback={<PageLoader />}>
-              <Outlet />
-            </Suspense>
-          </MainLayout>
-        ),
-        children: [
-          {
-            index: true,
-            element: <Dashboard />,
-          },
-        ],
-      },
-      {
-        path: rootPaths.authRoot,
-        element: (
-          <Suspense fallback={<Splash />}>
-            <Outlet />
-          </Suspense>
-        ),
-        children: [
-          {
-            path: paths.signin,
-
-          },
-          {
-            path: paths.signup,
-
-          },
-          {
-            path: paths.resetPassword,
-          },
-        ],
-      },
-      {
-        path: '*',
-        element: <Error404 />,
-      },
-    ],
+    path: '/',
+    element: <Dashboard />,  // Directly render the Dashboard at the root
+  },
+  {
+    path: '*',  // Catch-all for any invalid paths
+    element: <Error404 />,  // Display 404 Error page
   },
 ];
 
-const router = createBrowserRouter(routes, { basename: '/base' });
+const router = createBrowserRouter(routes);  // Basic browser router without basename
 
 export default router;

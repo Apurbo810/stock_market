@@ -1,4 +1,3 @@
-import paths from 'routes/paths';
 
 export interface SubMenuItem {
   name: string;
@@ -69,20 +68,6 @@ const sitemap: MenuItem[] = [
     subheader: 'Settings',
     path: '#!',
     icon: 'solar:settings-bold',
-  },
-  {
-    id: 'signin',
-    subheader: 'Sign In',
-    path: paths.signin,
-    icon: 'mage:lock-fill',
-    active: true,
-  },
-  {
-    id: 'signup',
-    subheader: 'Sign Up',
-    path: paths.signup,
-    icon: 'mage:user-plus-fill',
-    active: true,
   },
 ];
 
