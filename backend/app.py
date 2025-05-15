@@ -8,14 +8,11 @@ app = Flask(__name__)
 CORS(app)
 
 # Database configuration (using local PostgreSQL)
-<<<<<<< HEAD
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://test_i9q3_user:027lSHZYJv8wk5dDtQ1Mg0CMPtUsjyqn@dpg-cv59t45ds78s739bjf0g-a.oregon-postgres.render.com/test_i9q3'
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres.wuyolsvbcmjewbmdhfie:@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-=======
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres.wuyolsvbcmjewbmdhfie:hjaOCSX0ItKBraGX@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
->>>>>>> db3a3b2 (Update Flask backend with Supabase DB URL, model, and data loader)
 db = SQLAlchemy(app)
 
 # Define SQLAlchemy Model
