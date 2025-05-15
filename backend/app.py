@@ -10,7 +10,7 @@ CORS(app)
 # Database configuration (using local PostgreSQL)
 
 
-DATABASE_URL="postgresql://postgres.wuyolsvbcmjewbmdhfie:hjaOCSX0ItKBraGX@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+DATABASE_URL="postgresql://postgres:hjaOCSX0ItKBraGX@db.wuyolsvbcmjewbmdhfie.supabase.co:5432/postgres"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
